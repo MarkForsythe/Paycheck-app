@@ -20,8 +20,8 @@
 	</body>
 
 	<div class="btn-group">
-	  <button type="button" class="btn btn-default">Left</button>
-	  <button type="button" class="btn btn-default">Right</button>
+	  <button type="button" class="btn btn-default">Main</button>
+	  <button type="button" class="btn btn-default">Paychecks</button>
 	</div>
   <p id="payrate">$1.00hr</p>
 	<p class="setup" id="setup">Please get a pay-stub and enter your hour count.</p>
@@ -29,24 +29,25 @@
 	<p class="setup" id="setup2">Now enter the amount you earned after taxes</p>
 	<input class="setup" id="paycheckamount"></input>
 	
-	<button class="setup" id="enter">Enter</button>
-  <button class="setup" id="clockedin">Clock-in</button>
-  <button class="setup" id="clockout">Clock-out</button>
+	<button id="enter">Enter</button>
+  <button id="clockedin">Clock-in</button>
+  <button id="clockout">Clock-out</button>
+  
 
-	<p id="moneyprogression">xx</p>
+	<p id="moneyprogression">$0.000</p>
 
-  <h4>Earnings 4/16 to today</h4>
+  <h4>Earnings 4/16 to now</h4>
   <button>End pay-period</button>
-	<p id="thisperiod">$79.12<bold>14hr 21m</bold></p>
+	<p id="thisperiod">$79.12     <b>14hr 21m</b></p>
 
 
 
 
-  <script src="./script.js"></script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

@@ -1,63 +1,70 @@
 var hourcount;
 var paycheckamount;
 var hourlyrate;
-var moneyprogression = document.getElementById('moneyprogression');
-var payrate = document.getElementById('payrate');
 var makingamount = 0;
-var setup = document.getElementById('setup');
-setuphide1 = document.getElementById('hourcount');
-setuphide2 = document.getElementById('paycheckamount');
-setuphide3 = document.getElementById('setup');
-setuphide4 = document.getElementById('setup2');
-clockedin = document.getElementById('clockedin');
-clockout = document.getElementById('clockout');
-thisperiod = document.getElementById('thisperiod');
-isclockedin = false;
-clockedin.style.visibility="hidden";
-clockout.style.visibility="hidden";
+var paychecks = {};
+var ispaychecktrue;
+var daylog = [];
+
+var $moneyprogression = $('#moneyprogression');
+var $payrate = $('#payrate');
+var $setup = $('#setup');
+var $setuphide1 = $('#hourcount');
+var $setuphide2 = $('#paycheckamount');
+var $setuphide3 = $('#setup');
+var $setuphide4 = $('#setup2');
+var $clockedin = $('#clockedin');
+var $clockout = $('#clockout');
+$clockedin.hide();
+$clockout.hide();
+var $thisperiod = $('#thisperiod');
+var $enter = $('#enter');
+var daycount = 0;
+var isclockedin = false;
+$clockedin.hide();
 
 
-// $(document).ready(function () {
-// 	var $setup = $(".setup");
-// 	$('#enter').click(function () {
-// 		$setup.hide();
-// 	});
 
-// });
-clockedin.addEventListener('click', function () {
+$clockedin.click(function () {
 	isclockedin = true;
-
+	$clockedin.hide();
+	$clockout.fadeIn();
 });
 
 
-var enter = document.getElementById('enter');
-enter.addEventListener('click', function () {
-	hourcount = document.getElementById('hourcount').value;
-	paycheckamount = document.getElementById('paycheckamount').value;
+
+$enter.click(function () {
+	hourcount = $('#hourcount').val();
+	paycheckamount = $('#paycheckamount').val();
 	hourlyrate = (paycheckamount / hourcount) * 10000;
+	$('#enter').hide();
+	$clockedin.fadeIn();
+	$setuphide1.hide();
+	$setuphide2.hide();
+	$setuphide3.hide();
+	$setuphide4.hide();	
+
 	console.log(hourlyrate);
 });
 
 setInterval(function () {
-	if (hourlyrate > 1) {
-		clockedin.style.visibility="visible";
-		enter.style.visibility="hidden";
-		setuphide1.style.visibility="hidden";
-		setuphide2.style.visibility="hidden";
-		setuphide3.style.visibility="hidden";
-		setuphide4.style.visibility="hidden";	
-	};
 	if (isclockedin === true) {
-		clockedin.style.visibility="hidden";
-		clockout.style.visibility="visible";
 
 		makingamount += (hourlyrate / 7200);
-
 		var makingamountdisp = makingamount / 10000;
 		var hourlyratedisp = hourlyrate / 10000;
-		moneyprogression.innerHTML = '$' + makingamountdisp.toFixed(3);
-		payrate.innerHTML = '$' + hourlyratedisp.toFixed(2);
-		thisperiod.innerHTML = '$' + makingamount.toFixed(2);
+		$moneyprogression.html('$' + makingamountdisp.toFixed(3));
+		$payrate.html('$' + hourlyratedisp.toFixed(2));
+		$thisperiod.html('$' + makingamountdisp.toFixed(2));
+		
+		$clockout.click(function () {
+			isclockedin = false;
+			daylog[0] = Date.now();
+			$clockout.hide();
+			
+			console.log(daylog[0]);
+
+		});
 	};
 	
 }, 500);
