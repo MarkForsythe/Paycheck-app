@@ -1,3 +1,11 @@
+
+Storage.prototype.setArray = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getArray = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+
 var hourcount;
 var paycheckamount;
 var hourlyrate;
@@ -5,6 +13,7 @@ var makingamount = 0;
 var paychecks = {};
 var ispaychecktrue;
 var daylog = [];
+var gatheredPay;
 
 var $moneyprogression = $('#moneyprogression');
 var $payrate = $('#payrate');
@@ -15,6 +24,7 @@ var $setuphide3 = $('#setup');
 var $setuphide4 = $('#setup2');
 var $clockedin = $('#clockedin');
 var $clockout = $('#clockout');
+var $today = $('#today')
 $clockedin.hide();
 $clockout.hide();
 var $thisperiod = $('#thisperiod');
@@ -59,9 +69,11 @@ setInterval(function () {
 		
 		$clockout.click(function () {
 			isclockedin = false;
-			daylog[0] = Date.now();
+			daylog[0] = makingamountdisp;
+			window.localStorage.setItem("cachedPay", daylog[0]);
+			gatheredPay = window.localStorage.getArray("cachedPay");
+			$today.html(gatheredPay[0]);
 			$clockout.hide();
-			
 			console.log(daylog[0]);
 
 		});
